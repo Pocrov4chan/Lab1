@@ -1,3 +1,4 @@
+                                    #EXAMPLES FROM THE ARTICLES
 #Python HOME
 print("Hello, World!")
 
@@ -278,3 +279,83 @@ print(myorder.format(quantity, itemno, price))
 #Escape Character
 txt = "We are the so-called \"Vikings\" from the north."
 #String Methods
+
+
+                                    #EXERCISES FROM THE ARTICLES
+#Python Synatax
+print("Hello World")
+if 5 > 2:
+  print("YES")
+#Python comments
+#This is a comment
+""""
+This is a comment
+written in 
+more than just one line
+"""
+#Python variables
+carname = "Volvo"
+x = 50
+x = 5
+y = 10
+print(x + y)
+x = 5
+y = 10
+z = x + y
+print(z)
+x, y, z = "Orange", "Banana", "Cherry"
+x = y = z = "Orange"
+
+def myfunc():
+  global x
+  x = "fantastic"
+
+#Python Data Types
+x = 5
+print(type(x))
+#ans -- int
+
+x = "Hello World"
+print(type(x))
+#ans -- str
+x = 20.5
+print(type(x))
+#ans -- float
+
+x = ["apple", "banana", "cherry"]
+print(type(x))
+#ans -- list
+
+
+x = ("apple", "banana", "cherry")
+print(type(x))
+#ans -- tuple
+
+x = {"name" : "John", "age" : 36}
+print(type(x))
+
+#ans -- dict
+
+x = True
+print(type(x))
+#ans -- bool
+
+#Python numbers
+x = 5
+x = float(x)
+
+x = 5.5
+x = int(x)
+
+
+x = 5
+x = complex(x)
+
+#Python Strings
+x = "Hello World"
+print(len(x))
+
+txt = "Hello World"
+x = txt[0]
+
+
