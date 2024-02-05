@@ -1,0 +1,20 @@
+def grams_to_ounces(grams):
+    return 28.3495231 * grams
+
+def conversion(F):
+    return (5 / 9) * (F - 32)
+while True:
+    print("""If you wish to convert grams to ounces: print 'U'
+    If you wish to convert Fahrenhaits to Cel: print 'F'
+    If you want the programm to end : 'B'""")
+    user_input = input()
+    if user_input == "B":
+        break
+    elif user_input == "U":
+        print("print grams")
+        print(grams_to_ounces(int(input())))
+    elif user_input == "F":
+        print("print temreture in farerheits")
+        print(conversion(int(input())))
+    else:
+        print("Incorrect input")        
