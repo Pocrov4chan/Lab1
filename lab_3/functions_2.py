@@ -99,3 +99,6 @@ def average_score(movies):
 def average_score_category(movies, category_name):
     new_list = by_category(movies, category_name)
     return average_score(new_list)
+
+
+print(by_category(movies, "Suspense"))
