@@ -1,28 +1,61 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+
 using namespace std;
+const int N = (int)1e5+5;
+typedef long long ll;
+int n;
+ll t[4 * N];
 
-const int INF = 1e9;
-vector<int> coins = {1, 3, 4};
-vector<int> value(1000, INF);
-vector<bool> ready(1000, false); 
-
-int solve(int x) {
-    if (x < 0) return INF;
-    if (x == 0) return 0;
-    if (ready[x]) return value[x];
-    int best = INF;
-    for (auto c : coins) {
-        best = min(best, solve(x - c) + 1);
+void build(int v, int l, int r) {
+    if (l == r)
+        t[v] = 0; // = a[l];
+    else {
+        int mid = (l+r)/2;
+        build(v+v,l,mid);
+        build(v+v+1,mid+1,r);
+        t[v] = t[2*v] + t[2*v+1];
     }
-    value[x] = best;
-    ready[x] = true;
-    return best;
 }
 
-int main() {
-    int sum = 10;
-    cout << solve(sum) << endl;
+void update(int v, int l, int r, int i, int x) {
+    if (l == r) {
+        t[v] = x;
+    } else {
+        int mid = (l + r) / 2;
+        if (i <= mid)
+            update(v+v,l,mid,i,x);
+        else
+            update(v+v+1,mid+1,r,i,x);
+        t[v] = t[2*v] + t[2*v+1];
+    }
+}
+
+ll get(int v, int l, int r, int ql, int qr) {
+    if (qr < l || r < ql)
+        return 0;
+    if (ql <= l && r <= qr)
+        return t[v];
+    int mid = (l+r)/2;
+    return get(v+v,l,mid,ql,qr) 
+        + get(v+v+1,mid+1,r,ql,qr);
+}
+
+int main () {
+    int q;
+    scanf("%d %d\n", &n,&q);
+
+    for (int i = 1; i <= q; i++) {
+        char c;
+        int L, R;
+        scanf("%c %d %d\n", &c, &L, &R);
+        // printf("")
+        if (c == 'A') {
+            update(1,1,n,L, R); // i, x
+        } else {
+            printf("%lld\n", get(1,1,n,L,R));
+        }
+    }
+
+
     return 0;
 }
