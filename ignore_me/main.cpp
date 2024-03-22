@@ -1,61 +1,41 @@
 #include <iostream>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
-const int N = (int)1e5+5;
-typedef long long ll;
-int n;
-ll t[4 * N];
 
-void build(int v, int l, int r) {
-    if (l == r)
-        t[v] = 0; // = a[l];
-    else {
-        int mid = (l+r)/2;
-        build(v+v,l,mid);
-        build(v+v+1,mid+1,r);
-        t[v] = t[2*v] + t[2*v+1];
+
+int main() {
+    int n, k, counter = 0;
+    cin >> n >> k;
+    int arr[n];
+    for (int i = 0; i < n; ++i){
+        cin >> arr[i];
     }
-}
 
-void update(int v, int l, int r, int i, int x) {
-    if (l == r) {
-        t[v] = x;
-    } else {
-        int mid = (l + r) / 2;
-        if (i <= mid)
-            update(v+v,l,mid,i,x);
-        else
-            update(v+v+1,mid+1,r,i,x);
-        t[v] = t[2*v] + t[2*v+1];
-    }
-}
+    sort(arr, arr + n);
 
-ll get(int v, int l, int r, int ql, int qr) {
-    if (qr < l || r < ql)
+    if (arr[n - 1] > k){
+        cout << "Impossible";
         return 0;
-    if (ql <= l && r <= qr)
-        return t[v];
-    int mid = (l+r)/2;
-    return get(v+v,l,mid,ql,qr) 
-        + get(v+v+1,mid+1,r,ql,qr);
-}
+    }
 
-int main () {
-    int q;
-    scanf("%d %d\n", &n,&q);
-
-    for (int i = 1; i <= q; i++) {
-        char c;
-        int L, R;
-        scanf("%c %d %d\n", &c, &L, &R);
-        // printf("")
-        if (c == 'A') {
-            update(1,1,n,L, R); // i, x
-        } else {
-            printf("%lld\n", get(1,1,n,L,R));
+    for (int i = n - 1; i >= 0; --i){
+        for (int j = i - 1; j >= 0; --j){
+            if (arr[i] == 0 or arr[j] == 0){
+                continue;
+            }
+            else if (arr[i] + arr[j] <= k){
+                arr[i] = 0;
+                arr[j] = 0;
+                counter += 1;
+            }
         }
     }
-
-
+    for (int i = 0; i < n; i++){
+        if (arr[i] != 0){
+            counter += 1;
+        }
+    }
+    cout << counter;
     return 0;
 }

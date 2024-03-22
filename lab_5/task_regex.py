@@ -6,7 +6,7 @@ with open('row.txt', 'r', encoding='utf-8') as f:
     # we could obviously find each and every match
     # in the file by iterating over each line in the
     # file. I won't do it just for the sake of convinence 
-    # and the fact that it was't explicitly sad in the Lab
+    # and the fact that it was't explicitly said in the Lab
 
 #Task1
 pattern = re.compile(r'ab*')
@@ -20,7 +20,7 @@ print(pattern.match(read_data))
 pattern = re.compile(r'[a-z]+_[a-z]+')
 print(pattern.findall(read_data))
 
-#Task4
+# Task4
 pattern = re.compile(r'[A-Z]+[a-z]+')
 print(pattern.findall(read_data))
 
@@ -35,6 +35,7 @@ print(re.sub(pattern, ":", read_data))
 #Task7
 pattern = re.split(r'_', read_data)
 new_string = ''.join([pattern[0].lower()] + [word.capitalize() for word in pattern[1:]])
+print(pattern)
 print(new_string)
 
 #Task8
