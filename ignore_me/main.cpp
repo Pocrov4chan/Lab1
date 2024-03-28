@@ -1,41 +1,42 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
-
-int main() {
-    int n, k, counter = 0;
+int main(){
+    int n, k;
     cin >> n >> k;
     int arr[n];
-    for (int i = 0; i < n; ++i){
-        cin >> arr[i];
+
+    for (int i = 0 ; i < n; ++i){
+        cin >> arr[i]; 
     }
 
     sort(arr, arr + n);
 
-    if (arr[n - 1] > k){
+    if(arr[n - 1] > k){
         cout << "Impossible";
         return 0;
     }
 
-    for (int i = n - 1; i >= 0; --i){
-        for (int j = i - 1; j >= 0; --j){
-            if (arr[i] == 0 or arr[j] == 0){
-                continue;
-            }
-            else if (arr[i] + arr[j] <= k){
-                arr[i] = 0;
-                arr[j] = 0;
-                counter += 1;
-            }
+    int left_side = 0;
+    int right_side = n - 1;
+    int counter = 0;
+
+    while(left_side <= right_side){
+        if(arr[left_side] + arr[right_side] > k){
+            right_side -= 1;
+            counter += 1;
         }
-    }
-    for (int i = 0; i < n; i++){
-        if (arr[i] != 0){
+        else{
+            right_side -= 1;
+            left_side += 1;
             counter += 1;
         }
     }
     cout << counter;
-    return 0;
+
+
+
 }

@@ -36,5 +36,5 @@ while True:
 
     pygame.display.flip()
     pygame.time.Clock().tick(60)
-    clock.tick(60)
+    
 
