@@ -26,6 +26,7 @@ pygame.display.set_caption("Snake_game")
 FPS = 5
 clock = pygame.time.Clock()
 
+# Creating our class "Snake"
 class Snake:
     def __init__(self):
         self.x = CELL_SIZE
@@ -45,6 +46,7 @@ class Snake:
             if self.head.x not in range(0, WIDTH) or self.head.y not in range(0, HEIGHT):
                 self.dead = True
 
+        #check whether the snake is dead or no
         if self.dead:
             self.x = CELL_SIZE
             self.y = CELL_SIZE
@@ -56,6 +58,7 @@ class Snake:
             apple = Apple()
             FPS = 5
 
+        # logic behind eating the apple
         self.body.append(self.head)
         for i in range(0, len(self.body) - 1):
             self.body[i].x, self.body[i].y = self.body[i + 1].x, self.body[i + 1].y
@@ -63,6 +66,7 @@ class Snake:
         self.head.y += self.ydirection * CELL_SIZE
         self.body.remove(self.head)
 
+#We define our class Apple
 class Apple:
     def __init__(self):
         self.generate_food()
@@ -75,6 +79,7 @@ class Apple:
     def update(self):
         pygame.draw.rect(screen, RED, self.rect)
 
+#define class for randomly occuring event "SpecialApple"
 class SpecialApple(Apple):
     def __init__(self):
         super().__init__()
@@ -104,6 +109,7 @@ score_rect = score.get_rect(center=(55, 50))
 SPECIAL_APPLE = pygame.USEREVENT + 1
 pygame.time.set_timer(SPECIAL_APPLE, 20000)
 
+#Creating objects
 draw_grid()
 
 snake = Snake()
@@ -113,11 +119,13 @@ special_apple = SpecialApple()
 
 apples_eaten = 0
 
+#Main loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        #movement of the snake
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 snake.ydirection = 1
@@ -140,6 +148,7 @@ while True:
     draw_grid()
 
     apple.update()
+    # logic behind special apple
     if special_apple.visible:
         special_apple.update()
         special_apple.timer += 1
@@ -155,6 +164,7 @@ while True:
 
     screen.blit(score, score_rect)
 
+    #collisions
     if snake.head.colliderect(apple.rect):
         snake.body.append(pygame.Rect(square.x, square.y, CELL_SIZE, CELL_SIZE))
         apple.generate_food()
